@@ -74,10 +74,10 @@
     function esc(value) {
       return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
     }
-    function imagePath(file) {
-      const safe = String(file || '').split('/').pop();
-      return safe ? encodeURIComponent(safe) : '';
-    }
+   function imagePath(file) {
+  const safe = String(file || '').split('/').pop();
+  return safe ? encodeURIComponent(safe) : '';
+}
     function money(value) {
       const amount = Number(value);
       if (!Number.isFinite(amount)) return 'Cena nav norādīta';

@@ -55,7 +55,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // Public browser settings. Paste only the Supabase Publishable key here; never use a Secret/service_role key.
+    // Public browser settings. Paste only the supabaseClient Publishable key here; never use a Secret/service_role key.
    const SUPABASE_URL = 'https://hotaitohusekllqlxoht.supabase.co';
     const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Q4zeVFo6nc06Y_RYQxjIjA_KgRaox11';
 
@@ -67,7 +67,7 @@
     const form = $('#reservation-form');
     const submitButton = $('#submit-reservation');
     const formMessage = $('#form-message');
-    let supabase = null;
+   let supabaseClient = null;
     let products = [];
     let selectedProduct = null;
 
@@ -103,15 +103,15 @@
       }).join('');
     }
     async function loadProducts() {
-      if (!supabase) {
-        productsEl.innerHTML = '<div class="status">Vēl jāpievieno Supabase Publishable key. Skati norādes README failā.</div>';
+      if (!supabaseClient) {
+        productsEl.innerHTML = '<div class="status">Vēl jāpievieno supabaseClient Publishable key. Skati norādes README failā.</div>';
         countNote.textContent = 'Jāpabeidz iestatīšana';
         return;
       }
       productsEl.innerHTML = '<div class="status">Atjaunojam sarakstu…</div>';
-      const { data, error } = await supabase.from('products').select('id,name,description,price,image,product_url,stock').order('id');
+      const { data, error } = await supabaseClient.from('products').select('id,name,description,price,image,product_url,stock').order('id');
       if (error) {
-        productsEl.innerHTML = `<div class="status">Neizdevās ielādēt sarakstu. Pārbaudi Supabase politikas un savienojumu.<br><small>${esc(error.message)}</small></div>`;
+        productsEl.innerHTML = `<div class="status">Neizdevās ielādēt sarakstu. Pārbaudi supabaseClient politikas un savienojumu.<br><small>${esc(error.message)}</small></div>`;
         countNote.textContent = 'Savienojuma kļūda';
         return;
       }
@@ -146,7 +146,7 @@
 
     form.addEventListener('submit', async event => {
       event.preventDefault();
-      if (!supabase || !selectedProduct) return;
+      if (!supabaseClient || !selectedProduct) return;
       const quantity = Number($('#quantity').value);
       const reservedBy = $('#reserved-by').value.trim();
       const contact = $('#contact').value.trim();
@@ -159,7 +159,7 @@
       submitButton.textContent = 'Saglabājam…';
       formMessage.textContent = '';
       try {
-        const { data, error } = await supabase.rpc('reserve_product', {
+        const { data, error } = await supabaseClient.rpc('reserve_product', {
           p_product_id: Number(selectedProduct.id),
           p_quantity: quantity,
           p_reserved_by: reservedBy,
@@ -179,17 +179,16 @@
         submitButton.textContent = 'Apstiprināt rezervāciju';
       }
     });
-
-    if (window.supabase && SUPABASE_PUBLISHABLE_KEY !== 'IEVIETO_SAVU_SB_PUBLISHABLE_KEY_SEIT') {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+if (window.supabase && SUPABASE_PUBLISHABLE_KEY !== 'IEVIETO_SAVU_SB_PUBLISHABLE_KEY_SEIT') {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
       loadProducts();
       try {
-        supabase.channel('little-finds-products')
+        supabaseClient.channel('little-finds-products')
           .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, loadProducts)
           .subscribe();
       } catch (_) { /* Manual refresh and page-focus refresh still work. */ }
     } else {
-      productsEl.innerHTML = '<div class="status">Mājaslapa gandrīz gatava — jāpievieno Supabase Publishable key. Atver README failu un seko norādēm.</div>';
+      productsEl.innerHTML = '<div class="status">Mājaslapa gandrīz gatava — jāpievieno supabaseClient Publishable key. Atver README failu un seko norādēm.</div>';
       countNote.textContent = 'Jāpabeidz iestatīšana';
     }
   </script>

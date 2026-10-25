@@ -76,7 +76,7 @@
     }
     function imagePath(file) {
       const safe = String(file || '').split('/').pop();
-      return safe ? 'assets/' + encodeURIComponent(safe) : '';
+      return safe ? encodeURIComponent(safe) : '';
     }
     function money(value) {
       const amount = Number(value);

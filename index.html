@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3ed">
+  <title>little finds — mazas lietas, liels prieks</title>
+  <meta name="description" content="Little finds — lietu saraksts, ko vari rezervēt. Bez tūlītēja maksājuma.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#f7f3ed;--ink:#28251f;--muted:#777066;--line:#e3dbcf;--accent:#7e8b70;--accent-dark:#58634e;--white:#fffdf9;--soft:#ece8df;--danger:#a64b42}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}a{color:inherit}
+    .wrap{width:min(1160px,calc(100% - 40px));margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}.brand{font-family:'Playfair Display',serif;font-size:25px;letter-spacing:-.6px;text-decoration:none}.brand span{color:var(--accent-dark)}.top-note{font-size:12px;color:var(--muted);letter-spacing:1.4px;text-transform:uppercase}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;padding:72px 0 60px}.eyebrow{color:var(--accent-dark);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase}.hero h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(42px,6vw,74px);line-height:1.02;letter-spacing:-1.8px;margin:16px 0 22px;max-width:660px}.hero p{font-size:16px;line-height:1.8;color:var(--muted);max-width:490px;margin:0}.hero-art{min-height:260px;border-radius:48% 48% 8px 8px;background:#e6e0d5;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid rgba(88,99,78,.35);border-radius:50%;width:220px;height:220px}.hero-art:after{width:290px;height:290px}.hero-center{position:relative;z-index:1;text-align:center;font-family:'Playfair Display',serif;font-size:30px;line-height:1.15;color:var(--accent-dark)}.hero-center small{display:block;font:11px 'DM Sans',sans-serif;letter-spacing:2px;text-transform:uppercase;margin-top:14px}
+    .intro-row{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:4px 0 22px}.intro-row h2{font-family:'Playfair Display',serif;font-weight:500;font-size:34px;margin:0}.intro-row p{color:var(--muted);font-size:13px;margin:0}.toolbar{display:flex;gap:12px;margin:22px 0 28px}.search{flex:1;min-width:0;border:1px solid var(--line);border-radius:999px;padding:13px 18px;background:var(--white);outline:none}.search:focus,input:focus{border-color:var(--accent)}.refresh{border:1px solid var(--line);border-radius:999px;background:transparent;padding:12px 17px;cursor:pointer}.refresh:hover{background:var(--soft)}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-bottom:80px}.product{background:var(--white);border:1px solid var(--line);border-radius:7px;overflow:hidden;display:flex;flex-direction:column;min-width:0}.photo{height:270px;background:#ebe6dc;position:relative;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}.product:hover .photo img{transform:scale(1.025)}.stock-pill{position:absolute;left:14px;top:14px;background:rgba(255,253,249,.94);padding:7px 10px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.2px}.stock-pill.sold{color:var(--danger)}.product-body{padding:19px 19px 18px;display:flex;flex-direction:column;flex:1}.product-title{font-family:'Playfair Display',serif;font-size:22px;line-height:1.2;margin:0 0 8px;font-weight:600}.product-desc{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 18px;min-height:40px}.product-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}.price{font-size:16px;font-weight:700}.actions{display:flex;align-items:center;gap:10px}.details{font-size:12px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}.reserve-btn,.submit-btn{border:0;background:var(--accent-dark);color:white;border-radius:99px;padding:11px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:background .2s}.reserve-btn:hover,.submit-btn:hover{background:#424c3a}.reserve-btn:disabled{background:#c6c1b8;cursor:not-allowed}.empty,.status{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--muted)}
+    .bottom-note{border-top:1px solid var(--line);padding:28px 0 36px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:12px;line-height:1.6}.bottom-note strong{color:var(--ink)}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(36,33,28,.48);display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal-backdrop.open{display:flex}.modal{background:var(--white);border-radius:10px;width:min(460px,100%);padding:28px;position:relative;box-shadow:0 20px 70px rgba(0,0,0,.18)}.modal h3{font-family:'Playfair Display',serif;font-size:30px;font-weight:500;margin:0 32px 8px 0}.modal-sub{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 22px}.close{position:absolute;right:18px;top:16px;border:0;background:transparent;font-size:25px;cursor:pointer;color:var(--muted)}.field{display:block;margin:14px 0}.field span{display:block;font-size:12px;font-weight:700;margin-bottom:7px}.field input{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:6px;background:white;outline:none}.form-hint{font-size:11px;line-height:1.5;color:var(--muted);margin:12px 0 18px}.submit-btn{width:100%;padding:14px}.submit-btn:disabled{opacity:.6;cursor:wait}.form-message{font-size:13px;line-height:1.5;margin-top:14px}.form-message.error{color:var(--danger)}.form-message.success{color:var(--accent-dark)}.hidden{display:none!important}
+    @media(max-width:850px){.hero{grid-template-columns:1fr .7fr;gap:25px;padding:55px 0 45px}.photo{height:235px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}}
+    @media(max-width:580px){.wrap{width:min(100% - 28px,1160px)}.topbar{padding:18px 0}.top-note{font-size:10px;letter-spacing:.8px}.hero{grid-template-columns:1fr;padding:45px 0 42px;gap:26px}.hero h1{font-size:50px}.hero-art{min-height:190px;border-radius:48% 48% 6px 6px}.hero-center{font-size:25px}.intro-row{display:block}.intro-row h2{font-size:30px;margin-bottom:8px}.toolbar{margin:18px 0 20px}.grid{grid-template-columns:1fr;gap:18px;margin-bottom:50px}.photo{height:300px}.product-body{padding:17px}.product-title{font-size:23px}.product-desc{min-height:0}.bottom-note{display:block}.bottom-note div+div{margin-top:10px}}
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#top">little <span>finds</span></a>
+    <div class="top-note">A small wishlist</div>
+  </header>
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div><div class="eyebrow">Thoughtfully picked</div><h1>Mazas lietas,<br>liels prieks.</h1><p>Šeit apkopotas lietas, kas man patīk. Ja vēlies kādu no tām uzdāvināt, rezervē to zemāk — maksājums šeit nav jāveic. Paldies, ka esi daļa no šī mazā prieka.</p></div>
+      <div class="hero-art" aria-label="Little finds dekoratīvs attēls"><div class="hero-center">little<br>pleasures<small>little finds · wishlist</small></div></div>
+    </section>
+    <section aria-labelledby="list-title">
+      <div class="intro-row"><div><div class="eyebrow">The wishlist</div><h2 id="list-title">Lietu saraksts</h2></div><p id="count-note">Ielādējam lietas…</p></div>
+      <div class="toolbar"><input class="search" id="search" type="search" placeholder="Meklēt sarakstā…" aria-label="Meklēt produktus"><button class="refresh" id="refresh" type="button">Atjaunot ↻</button></div>
+      <div class="grid" id="products"><div class="status">Savienojamies ar sarakstu…</div></div>
+    </section>
+  </main>
+  <footer class="wrap bottom-note"><div><strong>little finds</strong><br>Izvēlēts ar mīlestību.</div><div>Rezervācija nav pirkums un neprasa tūlītēju maksājumu.<br>Pieejamība tiek atjaunota, kad rezervācija ir apstiprināta.</div></footer>
+  <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <button class="close" id="close-modal" type="button" aria-label="Aizvērt">×</button>
+      <h3 id="modal-title">Rezervēt lietu</h3><p class="modal-sub" id="modal-product-name"></p>
+      <form id="reservation-form">
+        <label class="field"><span>Tavs vārds</span><input id="reserved-by" name="reserved_by" required maxlength="100" autocomplete="name" placeholder="Vārds" /></label>
+        <label class="field"><span>E-pasts vai tālrunis</span><input id="contact" name="contact" required maxlength="180" autocomplete="email" placeholder="Kā ar tevi sazināties?" /></label>
+        <label class="field"><span>Daudzums</span><input id="quantity" name="quantity" type="number" min="1" value="1" required /></label>
+        <p class="form-hint">Šī ir tikai rezervācija, nevis apmaksāts pasūtījums. Kontaktinformācija tiek izmantota, lai sazinātos par šo rezervāciju.</p>
+        <button class="submit-btn" id="submit-reservation" type="submit">Apstiprināt rezervāciju</button>
+        <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Public browser settings. Paste only the Supabase Publishable key here; never use a Secret/service_role key.
+    const SUPABASE_URL = 'https://hotaitohusekllq1qloxht.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'IEVIETO_SAVU_SB_PUBLISHABLE_KEY_SEIT';
+
+    const $ = (selector) => document.querySelector(selector);
+    const productsEl = $('#products');
+    const searchEl = $('#search');
+    const countNote = $('#count-note');
+    const backdrop = $('#modal-backdrop');
+    const form = $('#reservation-form');
+    const submitButton = $('#submit-reservation');
+    const formMessage = $('#form-message');
+    let supabase = null;
+    let products = [];
+    let selectedProduct = null;
+
+    function esc(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    }
+    function imagePath(file) {
+      const safe = String(file || '').split('/').pop();
+      return safe ? 'assets/' + encodeURIComponent(safe) : '';
+    }
+    function money(value) {
+      const amount = Number(value);
+      if (!Number.isFinite(amount)) return 'Cena nav norādīta';
+      return new Intl.NumberFormat('lv-LV',{style:'currency',currency:'EUR'}).format(amount);
+    }
+    function available(product) { return Math.max(0, Number(product.stock ?? 0)); }
+    function renderProducts() {
+      const query = searchEl.value.trim().toLocaleLowerCase('lv');
+      const visible = products.filter(p => `${p.name || ''} ${p.description || ''}`.toLocaleLowerCase('lv').includes(query));
+      countNote.textContent = `${products.length} ${products.length === 1 ? 'lieta' : 'lietas'} sarakstā`;
+      if (!visible.length) {
+        productsEl.innerHTML = `<div class="empty">${products.length ? 'Nekas netika atrasts.' : 'Saraksts pagaidām ir tukšs.'}</div>`;
+        return;
+      }
+      productsEl.innerHTML = visible.map(p => {
+        const stock = available(p);
+        const image = imagePath(p.image);
+        const link = p.product_url ? `<a class="details" href="${esc(p.product_url)}" target="_blank" rel="noopener noreferrer">Apskatīt preci ↗</a>` : '';
+        return `<article class="product">
+          <div class="photo">${image ? `<img src="${image}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none'">` : ''}<span class="stock-pill ${stock < 1 ? 'sold' : ''}">${stock < 1 ? 'Rezervēts' : `Pieejami: ${stock}`}</span></div>
+          <div class="product-body"><h3 class="product-title">${esc(p.name)}</h3><p class="product-desc">${esc(p.description || '')}</p><div class="product-foot"><span class="price">${money(p.price)}</span><div class="actions">${link}<button class="reserve-btn" type="button" data-reserve="${Number(p.id)}" ${stock < 1 ? 'disabled' : ''}>${stock < 1 ? 'Nav pieejams' : 'Rezervēt'}</button></div></div></div>
+        </article>`;
+      }).join('');
+    }
+    async function loadProducts() {
+      if (!supabase) {
+        productsEl.innerHTML = '<div class="status">Vēl jāpievieno Supabase Publishable key. Skati norādes README failā.</div>';
+        countNote.textContent = 'Jāpabeidz iestatīšana';
+        return;
+      }
+      productsEl.innerHTML = '<div class="status">Atjaunojam sarakstu…</div>';
+      const { data, error } = await supabase.from('products').select('id,name,description,price,image,product_url,stock').order('id');
+      if (error) {
+        productsEl.innerHTML = `<div class="status">Neizdevās ielādēt sarakstu. Pārbaudi Supabase politikas un savienojumu.<br><small>${esc(error.message)}</small></div>`;
+        countNote.textContent = 'Savienojuma kļūda';
+        return;
+      }
+      products = data || [];
+      renderProducts();
+    }
+    function openReservation(id) {
+      selectedProduct = products.find(p => Number(p.id) === Number(id));
+      if (!selectedProduct || available(selectedProduct) < 1) return;
+      $('#modal-product-name').textContent = `${selectedProduct.name} · ${money(selectedProduct.price)}`;
+      $('#quantity').max = String(available(selectedProduct));
+      $('#quantity').value = '1';
+      formMessage.textContent = '';
+      formMessage.className = 'form-message';
+      submitButton.disabled = false;
+      submitButton.textContent = 'Apstiprināt rezervāciju';
+      backdrop.classList.add('open');
+      $('#reserved-by').focus();
+    }
+    function closeReservation() { backdrop.classList.remove('open'); selectedProduct = null; }
+    productsEl.addEventListener('click', event => {
+      const button = event.target.closest('[data-reserve]');
+      if (button) openReservation(button.dataset.reserve);
+    });
+    $('#close-modal').addEventListener('click', closeReservation);
+    backdrop.addEventListener('click', event => { if (event.target === backdrop) closeReservation(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeReservation(); });
+    searchEl.addEventListener('input', renderProducts);
+    $('#refresh').addEventListener('click', loadProducts);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) loadProducts(); });
+    window.addEventListener('focus', loadProducts);
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!supabase || !selectedProduct) return;
+      const quantity = Number($('#quantity').value);
+      const reservedBy = $('#reserved-by').value.trim();
+      const contact = $('#contact').value.trim();
+      if (!Number.isInteger(quantity) || quantity < 1 || quantity > available(selectedProduct)) {
+        formMessage.textContent = `Lūdzu, ievadi daudzumu no 1 līdz ${available(selectedProduct)}.`;
+        formMessage.className = 'form-message error';
+        return;
+      }
+      submitButton.disabled = true;
+      submitButton.textContent = 'Saglabājam…';
+      formMessage.textContent = '';
+      try {
+        const { data, error } = await supabase.rpc('reserve_product', {
+          p_product_id: Number(selectedProduct.id),
+          p_quantity: quantity,
+          p_reserved_by: reservedBy,
+          p_contact: contact
+        });
+        if (error) throw error;
+        if (data && typeof data === 'object' && data.success === false) throw new Error(data.message || 'Rezervāciju neizdevās apstiprināt.');
+        formMessage.textContent = 'Paldies! Rezervācijas pieprasījums ir nosūtīts. Saraksts tiks atjaunots.';
+        formMessage.className = 'form-message success';
+        form.reset();
+        await loadProducts();
+        setTimeout(closeReservation, 1600);
+      } catch (error) {
+        formMessage.textContent = error?.message || 'Neizdevās veikt rezervāciju. Lūdzu, mēģini vēlreiz.';
+        formMessage.className = 'form-message error';
+        submitButton.disabled = false;
+        submitButton.textContent = 'Apstiprināt rezervāciju';
+      }
+    });
+
+    if (window.supabase && SUPABASE_PUBLISHABLE_KEY !== 'IEVIETO_SAVU_SB_PUBLISHABLE_KEY_SEIT') {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+      loadProducts();
+      try {
+        supabase.channel('little-finds-products')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, loadProducts)
+          .subscribe();
+      } catch (_) { /* Manual refresh and page-focus refresh still work. */ }
+    } else {
+      productsEl.innerHTML = '<div class="status">Mājaslapa gandrīz gatava — jāpievieno Supabase Publishable key. Atver README failu un seko norādēm.</div>';
+      countNote.textContent = 'Jāpabeidz iestatīšana';
+    }
+  </script>
+</body>
+</html>
